@@ -7,6 +7,28 @@ const SimpleSendGridAdapter = (mailOptions: { apiKey: string; fromAddress: strin
 
   const sendgrid = new MailService();
 
+  const sendMail = ({
+    to,
+    subject,
+    text,
+    html,
+    templateId,
+    dynamicTemplateData,
+  }: Sensbox.MailTypeRequired): Promise<any> => {
+    sendgrid.setApiKey(mailOptions.apiKey);
+    const msg = {
+      to,
+      from: mailOptions.fromAddress,
+      subject,
+      text,
+      html: html || `<div>${text}</div>`,
+      templateId,
+      dynamicTemplateData,
+    };
+
+    return sendgrid.send(msg);
+  };
+
   const sendVerificationEmail = (options: { appName: string; link: string; user: Parse.User }) => {
     const { appName, link, user } = options;
 
@@ -53,28 +75,6 @@ const SimpleSendGridAdapter = (mailOptions: { apiKey: string; fromAddress: strin
     } catch (error) {
       throw new Error(`Cannot send mail to ${user.get('email')}.`);
     }
-  };
-
-  const sendMail = ({
-    to,
-    subject,
-    text,
-    html,
-    templateId,
-    dynamicTemplateData,
-  }: Sensbox.MailTypeRequired): Promise<any> => {
-    sendgrid.setApiKey(mailOptions.apiKey);
-    const msg = {
-      to,
-      from: mailOptions.fromAddress,
-      subject,
-      text,
-      html: html || `<div>${text}</div>`,
-      templateId,
-      dynamicTemplateData,
-    };
-
-    return sendgrid.send(msg);
   };
 
   return Object.freeze({
