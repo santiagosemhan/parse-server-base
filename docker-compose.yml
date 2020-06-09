@@ -20,6 +20,7 @@ services:
         max-size: "200k"
         max-file: "10"
     build:
+      context: .
       args:
         NPM_RUN_SCRIPT: ${CORE_RUN_SCRIPT}
     volumes:
