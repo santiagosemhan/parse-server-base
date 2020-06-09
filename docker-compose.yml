@@ -2,6 +2,7 @@ version: '3'
 services:
   redis:
     image: redis:alpine
+    container_name: to_redis
     restart: always
     logging:
       driver: "json-file"
@@ -12,8 +13,29 @@ services:
       default:
         aliases:
           - redis-server
+  mongo:
+    image: mongo:4.2
+    restart: always
+    container_name: to_mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    volumes:
+      - ./backups/mongo/:/data/db:cached
+    logging:
+        driver: "json-file"
+        options:
+          max-size: "200k"
+          max-file: "10"
+    networks:
+      default:
+        aliases:
+          - mongo-server
   core-api:
     restart: always
+    container_name: to_api
     logging:
       driver: "json-file"
       options:
