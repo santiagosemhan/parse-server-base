@@ -1,6 +1,5 @@
 import { getQueryAuthOptions } from '../utils';
 import AccountService from './AccountService';
-import Account from '../classes/Account';
 
 const SYSTEM_ROLES = ['role:ROLE_SUPER_ADMIN'];
 
@@ -35,7 +34,7 @@ const requestObjectPermissions = async (
       query.equalTo('user', User.createWithoutData(userId).toPointer());
       query.include('user');
       return query.first({ useMasterKey: true }).then((value) => {
-        const account = <Account>value;
+        const account = <Sensbox.Account>value;
         if (!account) return null;
         return {
           userId,
@@ -94,7 +93,7 @@ const findUsersByText = async (text: string, user: Parse.User) => {
     return results
       .filter((a) => a !== undefined)
       .map((a) => {
-        const account = <Account>a;
+        const account = <Sensbox.Account>a;
         return account.flat();
       });
   }
@@ -109,7 +108,7 @@ const findUsersByText = async (text: string, user: Parse.User) => {
   // Prevent to fetch the user that request endpoint
   accountQuery.notEqualTo('user', user.toPointer());
   // eslint-disable-next-line keyword-spacing
-  const accounts = <Account[]>await accountQuery.find({ useMasterKey: true });
+  const accounts = <Sensbox.Account[]>await accountQuery.find({ useMasterKey: true });
   return accounts.map((a) => a.flat());
 };
 
