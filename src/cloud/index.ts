@@ -1,16 +1,6 @@
 import { loadCloudFunctions, loadClassHooks } from './utils/loader';
 import SecurityService from './services/SecurityService';
 
-const Influx = require('influx');
-
-const influxDSN = process.env.INFLUX_DSN;
-const InfluxDB = new Influx.InfluxDB(influxDSN);
-
-// @ts-ignore
-Parse.Integrations = {
-  InfluxDB,
-};
-
 // Load triggers for each registered class
 loadClassHooks();
 
