@@ -20,11 +20,10 @@ services:
         max-size: "200k"
         max-file: "10"
     build:
-      context: ./sensbox-core-api
       args:
         NPM_RUN_SCRIPT: ${CORE_RUN_SCRIPT}
     volumes:
-      - ./sensbox-core-api:/srv/node-scripts/:cached
+      - ./:/srv/node-scripts/:cached
       - /srv/node-scripts/node_modules
     ports:
       - 4040:4444
