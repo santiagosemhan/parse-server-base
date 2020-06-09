@@ -17,10 +17,6 @@ const definitions: Sensbox.RouteDefinitions = {
     action: DefaultController.requestObjectPermissions,
     secure: true,
   },
-  requestDeviceKey: {
-    action: DefaultController.requestDeviceKey,
-    secure: true,
-  },
 };
 
 export default definitions;

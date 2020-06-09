@@ -1,4 +1,4 @@
-import { UserService, DeviceService } from '../services';
+import { UserService } from '../services';
 
 const ping = () => ({
   msg: 'pong',
@@ -23,16 +23,9 @@ const requestObjectPermissions = async (request: Sensbox.SecureFunctionRequest) 
   return UserService.requestObjectPermissions(className, objectId, user, master);
 };
 
-const requestDeviceKey = async (request: Sensbox.SecureFunctionRequest) => {
-  const { user, params } = request;
-  const { uuid, password } = params;
-  return DeviceService.requestDeviceKey(uuid, password, user);
-};
-
 export default {
   me,
   ping,
   findUsersByText,
   requestObjectPermissions,
-  requestDeviceKey,
 };
