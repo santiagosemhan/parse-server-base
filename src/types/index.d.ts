@@ -81,4 +81,8 @@ declare namespace Sensbox {
     user: Parse.User;
   }
 
+  interface Account extends Parse.Object {
+    flat(): Object;
+  }
+
 }
