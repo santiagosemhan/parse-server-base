@@ -21,7 +21,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     volumes:
-      - ./backups/mongo/:/data/db:cached
+      - ${MONGO_VOLUMEN}:/data/db:cached
     logging:
         driver: "json-file"
         options:
