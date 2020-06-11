@@ -12,7 +12,7 @@ import { PlaceAutocompleteResult } from '@googlemaps/google-maps-services-js/dis
 const { GOOGLE_MAPS_API_KEY } = process.env;
 
 if (!GOOGLE_MAPS_API_KEY) {
-  throw new Error('GOOGLE_MAPS_API_KEY cannot be loaded. Please check your .env file');
+  console.error('GOOGLE_MAPS_API_KEY cannot be loaded. Please check your .env file');
 }
 
 const reverseGeocode = async (
