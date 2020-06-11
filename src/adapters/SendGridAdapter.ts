@@ -37,6 +37,9 @@ const SimpleSendGridAdapter = (mailOptions: { apiKey: string; fromAddress: strin
       : user.get('username');
 
     try {
+      const templateId = process.env.SENDGRID_VERIFICATION_TEMPLATE;
+      if (!templateId) throw new Error('Cannot send verification email without a template id');
+
       return sendMail({
         to: user.get('email'),
         subject: 'Account Verification',
@@ -61,10 +64,12 @@ const SimpleSendGridAdapter = (mailOptions: { apiKey: string; fromAddress: strin
       : user.get('username');
 
     try {
+      const templateId = process.env.SENDGRID_PASSWORD_RESET_TEMPLATE;
+      if (!templateId) throw new Error('Cannot send password reset email without a template id');
       return sendMail({
         to: user.get('email'),
         subject: 'Password Reset',
-        templateId: 'd-85e4bb8097ee4c7dadcecb6980e7c13c',
+        templateId,
         dynamicTemplateData: {
           appName,
           link,
