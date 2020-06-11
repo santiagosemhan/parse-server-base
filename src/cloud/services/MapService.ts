@@ -15,10 +15,19 @@ if (!GOOGLE_MAPS_API_KEY) {
   console.error('GOOGLE_MAPS_API_KEY cannot be loaded. Please check your .env file');
 }
 
+const checkGoogleMapsApiKey = (): boolean => {
+  if (!GOOGLE_MAPS_API_KEY) {
+    throw new Error('Cannot call google maps withtou api key');
+  }
+
+  return true;
+}
+
 const reverseGeocode = async (
   latitude: number,
   longitude: number,
 ): Promise<{ formatted_address: string; address_components: AddressComponent[] }> => {
+  checkGoogleMapsApiKey();
   if (!(latitude && longitude)) {
     throw new Error('Latitude and Longitude must be provided');
   }
@@ -48,6 +57,7 @@ const reverseGeocode = async (
 const geocode = async (
   address: string,
 ): Promise<{ formatted_address: string; geocode: LatLngLiteral }> => {
+  checkGoogleMapsApiKey();
   if (!address) {
     throw new Error('Address must be provided');
   }
@@ -74,6 +84,7 @@ const geocode = async (
 const placeAutocomplete = async (
   address: string,
 ): Promise<{ predictions: PlaceAutocompleteResult[] }> => {
+  checkGoogleMapsApiKey();
   if (!address) {
     throw new Error('Address must be provided');
   }
@@ -101,6 +112,7 @@ const distancematrix = async (
   origin: LatLng,
   destination: LatLng,
 ): Promise<{ distance: DistanceMatrixRow[] }> => {
+  checkGoogleMapsApiKey();
   const client = new Client({});
   const result: DistanceMatrixResponse = await client.distancematrix({
     params: {
