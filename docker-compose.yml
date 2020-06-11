@@ -47,6 +47,7 @@ services:
       - 4040:4444
       - 9229:9229
     environment:
+      APP_NAME: ${APP_NAME}
       APP_ID: ${APP_ID}
       ALLOW_INSECURE_HTTP: ${ALLOW_INSECURE_HTTP}
       MONGO_DSN: ${MONGO_DSN}

@@ -40,7 +40,7 @@ export default {
       // "role:admin": []
     },
   },
-  appName: process.env.APP_NAME || 'sensbox',
+  appName: process.env.APP_NAME || 'brand',
   emailAdapter: SimpleSendGridAdapter({
     apiKey: process.env.SENDGRID_API_KEY || 'sendgridkey',
     fromAddress: process.env.NOTIFICATION_EMAIL_ADDRESS || 'mail@brand.net',
