@@ -11,7 +11,7 @@ Parse.Cloud.beforeLogin(async (request: Parse.Cloud.TriggerRequest) => {
   const { object: user, headers } = request;
   const { origin } = headers;
   try {
-    if (origin && origin === process.env.SENSBOX_DASHBOARD_ORIGIN) {
+    if (origin && origin === process.env.DASHBOARD_ORIGIN) {
       await SecurityService.ensureIsAdmin(<Parse.User>user);
     }
     if (user.get('isBanned')) {
