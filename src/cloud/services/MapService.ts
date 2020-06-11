@@ -15,19 +15,10 @@ if (!GOOGLE_MAPS_API_KEY) {
   console.error('GOOGLE_MAPS_API_KEY cannot be loaded. Please check your .env file');
 }
 
-const checkGoogleMapsApiKey = (): boolean => {
-  if (!GOOGLE_MAPS_API_KEY) {
-    throw new Error('Cannot call google maps withtou api key');
-  }
-
-  return true;
-}
-
 const reverseGeocode = async (
   latitude: number,
   longitude: number,
 ): Promise<{ formatted_address: string; address_components: AddressComponent[] }> => {
-  checkGoogleMapsApiKey();
   if (!(latitude && longitude)) {
     throw new Error('Latitude and Longitude must be provided');
   }
@@ -38,7 +29,7 @@ const reverseGeocode = async (
         latitude,
         longitude,
       },
-      key: GOOGLE_MAPS_API_KEY,
+      key: GOOGLE_MAPS_API_KEY || '',
     },
     timeout: 1000, // milliseconds
   });
@@ -57,7 +48,6 @@ const reverseGeocode = async (
 const geocode = async (
   address: string,
 ): Promise<{ formatted_address: string; geocode: LatLngLiteral }> => {
-  checkGoogleMapsApiKey();
   if (!address) {
     throw new Error('Address must be provided');
   }
@@ -65,7 +55,7 @@ const geocode = async (
   const result = await client.geocode({
     params: {
       address,
-      key: GOOGLE_MAPS_API_KEY,
+      key: GOOGLE_MAPS_API_KEY || '',
     },
     timeout: 1000, // milliseconds
   });
@@ -84,7 +74,6 @@ const geocode = async (
 const placeAutocomplete = async (
   address: string,
 ): Promise<{ predictions: PlaceAutocompleteResult[] }> => {
-  checkGoogleMapsApiKey();
   if (!address) {
     throw new Error('Address must be provided');
   }
@@ -92,7 +81,7 @@ const placeAutocomplete = async (
   const result = await client.placeAutocomplete({
     params: {
       input: address,
-      key: GOOGLE_MAPS_API_KEY,
+      key: GOOGLE_MAPS_API_KEY || '',
     },
     timeout: 1000, // milliseconds
   });
@@ -112,7 +101,6 @@ const distancematrix = async (
   origin: LatLng,
   destination: LatLng,
 ): Promise<{ distance: DistanceMatrixRow[] }> => {
-  checkGoogleMapsApiKey();
   const client = new Client({});
   const result: DistanceMatrixResponse = await client.distancematrix({
     params: {
@@ -120,7 +108,7 @@ const distancematrix = async (
       destinations: [destination],
       mode: TravelMode.driving,
       units: UnitSystem.metric,
-      key: GOOGLE_MAPS_API_KEY,
+      key: GOOGLE_MAPS_API_KEY || '',
     },
     timeout: 1000, // milliseconds
   });
