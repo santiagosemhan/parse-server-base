@@ -33,13 +33,13 @@ export default {
     classNames: [],
     redisURL: process.env.REDIS_DSN,
   },
-  protectedFields: {
-    Device: {
-      '*': ['key'],
+  // protectedFields: {
+  //  ExampleClass: {
+      // '*': ['key'],
       // "role:moderator": ["sin"],
       // "role:admin": []
-    },
-  },
+    // },
+  // },
   appName: process.env.APP_NAME || 'brand',
   emailAdapter: SimpleSendGridAdapter({
     apiKey: process.env.SENDGRID_API_KEY || 'sendgridkey',
