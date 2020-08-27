@@ -43,7 +43,7 @@ const SimpleSendGridAdapter = (mailOptions: { apiKey: string; fromAddress: strin
       return sendMail({
         to: user.get('email'),
         subject: 'Account Verification',
-        templateId: 'd-29f1f0d1c4644557b243d088b87486c7',
+        templateId,
         dynamicTemplateData: {
           appName,
           link,
