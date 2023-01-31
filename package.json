@@ -33,7 +33,7 @@
     "express": "^4.17.1",
     "hat": "0.0.3",
     "parse-dashboard": "^2.1.0",
-    "parse-server": "^4.3.0",
+    "parse-server": "^5.4.1",
     "saslprep": "^1.0.3"
   },
   "devDependencies": {
